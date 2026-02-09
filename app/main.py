@@ -18,7 +18,7 @@ def post_product(product: ProductSchema) -> ProductSchema:
     with pool.connection() as conn:
         with conn.transaction():
             conn.execute(
-                "INSERT INTO produts_raw (payload) VALUES (%s)",
+                "INSERT INTO products_raw (payload) VALUES (%s)",
                 Json(product.model_dump()),
             )
 
