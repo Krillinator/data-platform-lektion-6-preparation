@@ -12,6 +12,8 @@ pool = ConnectionPool(DATABASE_URL)
 def read_root():
     return {"Hello": "World"}
 
+print("")
+
 @app.post("/products", status_code=status.HTTP_201_CREATED, response_model=ProductSchema)
 def post_product(product: ProductSchema) -> ProductSchema:
 
@@ -19,7 +21,7 @@ def post_product(product: ProductSchema) -> ProductSchema:
         with conn.transaction():
             conn.execute(
                 "INSERT INTO products_raw (payload) VALUES (%s)",
-                Json(product.model_dump()),
+                Json(product.model_dump(),),
             )
 
     return product
